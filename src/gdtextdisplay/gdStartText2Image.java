@@ -5,6 +5,10 @@
  */
 package gdtextdisplay;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author gerard
@@ -113,7 +117,26 @@ public class gdStartText2Image extends javax.swing.JFrame {
         System.out.println("You chose to open this file: "
                 + jFileChooser1.getSelectedFile().getName());
         System.out.println(jTextField1.getText());
-//        System.out.println(jTextField2);
+        System.out.println(jTextField2.getText());
+//        System.out.println(jTextArea1.getText());
+        String[] lines = jTextArea1.getText().split("\n"); //breaking the lines into an array
+        int i = 0 ;
+        System.out.println(lines[i++]);
+        System.out.println(lines[i++]);
+        System.out.println(lines[i++]);
+        System.out.println(lines[i++]);
+        GdTextDisplay gdt = new GdTextDisplay();
+        gdt.deText = jTextArea1.getText();
+        gdt.fontGrootte = Integer.parseInt(jTextField1.getText());
+        gdt.linkerMarge = Integer.parseInt(jTextField2.getText());
+        gdt.imageFile = jFileChooser1.getSelectedFile();
+        try {
+            gdt.GdTextDisplay2();
+        } catch (IOException ex) {
+            Logger.getLogger(gdStartText2Image.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
