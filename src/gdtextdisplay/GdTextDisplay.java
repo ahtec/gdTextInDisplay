@@ -12,6 +12,7 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -23,29 +24,37 @@ import javax.imageio.ImageIO;
  * @author gerard
  */
 public class GdTextDisplay {
+    
+    public String  deText ;
+    public File imageFile ;
+    public int fontGrootte;
+    public int linkerMarge;
+    
+    
+    public GdTextDisplay(){
+        
+        
+    }
 
-//    static public String overlayText = "Brandend Zand en een verloren land \n"
-//            + "En een leven vol gevaar\n"
-//            + "12345678911234567892123456789312345678941234567895\n"
-//            + "Brandend Zand berooft je bijna van 't verstand\n"
-//            + "En dat alles komt door haar.";
-//
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws IOException {
+ public void GdTextDisplay2() throws FileNotFoundException, IOException {
+
+ 
+//public static void main(String[] args) throws IOException {
+    
 //        overlayText = args[0];
-        String text = null;
+//        String text = null;
 
-        File file = new File(args[0], args[1]);
-        BufferedReader reader = null;
-        reader = new BufferedReader(new FileReader(file));
+//        File file = new File( args[1]);
+
+//        BufferedReader reader = null;
+//        reader = new BufferedReader(new FileReader(file));
 //        reader.mark(1);
-        int aantalLiedRegels = 0;
-        while ((text = reader.readLine()) != null) {
-            aantalLiedRegels++;
-        }
-        reader.close();
+//        int aantalLiedRegels = 0;
+//        while ((text = reader.readLine()) != null) {
+        String[] lines = deText.split("\n"); //breaking the lines into an array
+            int aantalLiedRegels  = lines.length;
+//        }
+//        reader.close();
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
@@ -59,11 +68,11 @@ public class GdTextDisplay {
 //        int fontSize = (int) Math.round(maxAantalCharactersOpScherm * screenRes / 72.0);
 //        System.out.println(fontSize);
 //        String path = "/home/gerard/Afbeeldingen";
-        String path = args[0];
+//        String path = args[0];
 
 // load source images
-        BufferedImage image = ImageIO.read(new File(path, "image.png"));
-        BufferedImage overlay = ImageIO.read(new File(path, "overlay.png"));
+        BufferedImage image = ImageIO.read( imageFile);
+//        BufferedImage overlay = ImageIO.read(new File(path, "overlay.png"));
 
 // create the new image, canvas size is the max. of both image sizes
         int w = image.getWidth();
@@ -78,8 +87,8 @@ public class GdTextDisplay {
 
 //            g.setFont(new Font("Arial", Font.PLAIN, fontSize));
 //            g.setFont(new Font("Arial", Font.PLAIN, 45));
-        int fontsize = Integer.parseInt(args[2]);
-        g.setFont(new Font("Courier", Font.PLAIN, fontsize));
+//        int fontsize = Integer.parseI fontGrootte);
+        g.setFont(new Font("Courier", Font.PLAIN, fontGrootte));
 //            g.setFont(g.getFont().deriveFont(30f));
 //            String[] lines = overlayText.split("\n"); //breaking the lines into an array
 //            String[] lines = overlayText.split("|"); //breaking the lines into an array
@@ -101,19 +110,19 @@ public class GdTextDisplay {
 //            System.out.println(langstRegel);
 //            System.out.println(xPos);
 //            System.out.println(xPos);
-        int xPos = Integer.parseInt(args[3]);
-        int lineCount = 0;
+        int xPos = linkerMarge;
+//        int lineCount = 0;
         int yPos;
         yPos = h - (lineHeight * (aantalLiedRegels));
         int yPosStart = yPos;
-        reader = new BufferedReader(new FileReader(file));
-        while ((text = reader.readLine()) != null) {
-//            for (int lineCount = 0; lineCount < lines.length; lineCount++) { //lines from above
+//        reader = new BufferedReader(new FileReader(file));
+//        while ((text = reader.readLine()) != null) {
+            for (int lineCount = 0; lineCount < lines.length; lineCount++) { //lines from above
 //            yPos = (int) h / 2 + lineCount * lineHeight;
             yPos = yPosStart  + lineCount * lineHeight;
-//                String line = lines[lineCount];
-            g.drawString(text, xPos, yPos);
-            lineCount++;
+                String line = lines[lineCount];
+            g.drawString(line, xPos, yPos);
+//            lineCount++;
 
         }
         g.dispose();
@@ -121,7 +130,8 @@ public class GdTextDisplay {
 //        g.dispose();
 
 // Save as new image
-        ImageIO.write(combined, "PNG", new File(path, "combined.png"));
+ String combinedName = "combined"+imageFile.getName();
+        ImageIO.write(combined, "PNG", new File(imageFile.getParent(), combinedName));
 // TODO code application logic here
 //        } catch (IOException ex) {
 //            Logger.getLogger(GdTextDisplay.class.getName()).log(Level.SEVERE, null, ex);
