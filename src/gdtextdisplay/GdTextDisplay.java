@@ -98,7 +98,6 @@ public class GdTextDisplay {
 
 //            g.setFont(g.getFont().deriveFont(30f));
         int lineHeight = g.getFontMetrics().getHeight();
-//            int lineWidth = g.getFontMetrics().charWidth(0)
 
 //            int xPos = (int) width - ((fontSize) * langstRegel);
 //        int xPos = 600;
@@ -108,19 +107,23 @@ public class GdTextDisplay {
 //            System.out.println(xPos);
 //            System.out.println(xPos);
         int xPos = linkerMarge;
-//        int lineCount = 0;
+// ************* berekenen langste line  **************
+        int lineWidth = 0;
+        String line;
+        for (int lineCount = 0; lineCount < lines.length; lineCount++) { //lines from above
+            line = lines[lineCount];
+            lineWidth = Math.max(g.getFontMetrics().stringWidth(line), lineWidth);
+        }
+        xPos = w - lineWidth;  // marge rechts uitgeleijnd op de langste regel
         int yPos;
         yPos = h - (lineHeight * (aantalLiedRegels));
         int yPosStart = yPos;
-//        reader = new BufferedReader(new FileReader(file));
-//        while ((text = reader.readLine()) != null) {
         for (int lineCount = 0; lineCount < lines.length; lineCount++) { //lines from above
 //            yPos = (int) h / 2 + lineCount * lineHeight;
             yPos = yPosStart + lineCount * lineHeight;
-            String line = lines[lineCount];
+            line = lines[lineCount];
             g.setColor(fontColor);
             g.drawString(line, xPos, yPos);
-//            lineCount++;
 
         }
         g.dispose();
