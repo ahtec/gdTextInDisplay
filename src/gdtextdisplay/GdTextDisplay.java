@@ -5,6 +5,7 @@
  */
 package gdtextdisplay;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -24,35 +25,30 @@ import javax.imageio.ImageIO;
  * @author gerard
  */
 public class GdTextDisplay {
-    
-    public String  deText ;
-    public File imageFile ;
+
+    public String deText;
+    public File imageFile;
     public int fontGrootte;
     public int linkerMarge;
-    
-    
-    public GdTextDisplay(){
-        
-        
+    public Color fontColor;
+
+    public GdTextDisplay() {
+
     }
 
- public void GdTextDisplay2() throws FileNotFoundException, IOException {
+    public void verwerk() throws FileNotFoundException, IOException {
 
- 
 //public static void main(String[] args) throws IOException {
-    
 //        overlayText = args[0];
 //        String text = null;
-
 //        File file = new File( args[1]);
-
 //        BufferedReader reader = null;
 //        reader = new BufferedReader(new FileReader(file));
 //        reader.mark(1);
 //        int aantalLiedRegels = 0;
 //        while ((text = reader.readLine()) != null) {
         String[] lines = deText.split("\n"); //breaking the lines into an array
-            int aantalLiedRegels  = lines.length;
+        int aantalLiedRegels = lines.length;
 //        }
 //        reader.close();
 
@@ -69,9 +65,8 @@ public class GdTextDisplay {
 //        System.out.println(fontSize);
 //        String path = "/home/gerard/Afbeeldingen";
 //        String path = args[0];
-
 // load source images
-        BufferedImage image = ImageIO.read( imageFile);
+        BufferedImage image = ImageIO.read(imageFile);
 //        BufferedImage overlay = ImageIO.read(new File(path, "overlay.png"));
 
 // create the new image, canvas size is the max. of both image sizes
@@ -88,7 +83,9 @@ public class GdTextDisplay {
 //            g.setFont(new Font("Arial", Font.PLAIN, fontSize));
 //            g.setFont(new Font("Arial", Font.PLAIN, 45));
 //        int fontsize = Integer.parseI fontGrootte);
-        g.setFont(new Font("Courier", Font.PLAIN, fontGrootte));
+        Font hetFont = new Font("Courier", Font.PLAIN, fontGrootte);
+//        g.setFont(new Font("Courier", Font.PLAIN, fontGrootte));
+        g.setFont(hetFont);
 //            g.setFont(g.getFont().deriveFont(30f));
 //            String[] lines = overlayText.split("\n"); //breaking the lines into an array
 //            String[] lines = overlayText.split("|"); //breaking the lines into an array
@@ -117,10 +114,11 @@ public class GdTextDisplay {
         int yPosStart = yPos;
 //        reader = new BufferedReader(new FileReader(file));
 //        while ((text = reader.readLine()) != null) {
-            for (int lineCount = 0; lineCount < lines.length; lineCount++) { //lines from above
+        for (int lineCount = 0; lineCount < lines.length; lineCount++) { //lines from above
 //            yPos = (int) h / 2 + lineCount * lineHeight;
-            yPos = yPosStart  + lineCount * lineHeight;
-                String line = lines[lineCount];
+            yPos = yPosStart + lineCount * lineHeight;
+            String line = lines[lineCount];
+            g.setColor(fontColor);
             g.drawString(line, xPos, yPos);
 //            lineCount++;
 
@@ -130,7 +128,7 @@ public class GdTextDisplay {
 //        g.dispose();
 
 // Save as new image
- String combinedName = "combined"+imageFile.getName();
+        String combinedName = "combined" + imageFile.getName();
         ImageIO.write(combined, "PNG", new File(imageFile.getParent(), combinedName));
 // TODO code application logic here
 //        } catch (IOException ex) {
