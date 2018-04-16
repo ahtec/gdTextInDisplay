@@ -83,7 +83,11 @@ public class GdTextDisplay {
 //            g.setFont(new Font("Arial", Font.PLAIN, fontSize));
 //            g.setFont(new Font("Arial", Font.PLAIN, 45));
 //        int fontsize = Integer.parseI fontGrootte);
-        Font hetFont = new Font("Courier", Font.PLAIN, fontGrootte);
+        Font hetFont;
+//        hetFont = new Font("Courier", Font.PLAIN, fontGrootte);
+//        hetFont = new Font("Arial", Font.PLAIN, fontGrootte);
+        hetFont = new Font("TimesRoman", Font.PLAIN, fontGrootte);
+        
 //        g.setFont(new Font("Courier", Font.PLAIN, fontGrootte));
         g.setFont(hetFont);
 //            g.setFont(g.getFont().deriveFont(30f));
@@ -126,15 +130,54 @@ public class GdTextDisplay {
             g.drawString(line, xPos, yPos);
 
         }
+        
+//        // test font
+//      Font tr = new Font("TimesRoman", Font.PLAIN, fontGrootte);
+////      Font trb = new Font("TimesRoman", Font.BOLD, 18);
+////      Font tri = new Font("TimesRoman", Font.ITALIC, 18);
+////      Font trbi = new Font("TimesRoman", Font.BOLD+Font.ITALIC, 18);
+//      Font h1 = new Font("Helvetica", Font.PLAIN, fontGrootte);
+//      Font c = new Font("Courier", Font.PLAIN, fontGrootte);
+//      Font d = new Font("Dialog", Font.PLAIN, fontGrootte);      
+//      Font z = new Font("ZapfDingbats", Font.PLAIN, fontGrootte);            
+//int i = 500;
+//      g.setFont(tr);
+//      g.drawString("Hello World (times roman plain)",i,25);
+////      g.setFont(trb);
+////      g.drawString("Hello World (times roman bold)",i,50);
+//////      g.setFont(tri);
+//////      g.drawString("Hello World (times roman italic)",i,75);
+////      g.setFont(trbi);
+////      g.drawString("Hello World (times roman bold & italic)",i,100);
+//      g.setFont(h1);
+//      g.drawString("Hello World (helvetica)",i,125);
+//      g.setFont(c);
+//      g.drawString("Hello World (courier)",i,150);
+//      g.setFont(d);
+//      g.drawString("Hello World (dialog)",i,175);
+//      g.setFont(z);
+//      g.drawString("Hello World (zapf dingbats)",i,200);
+        // **********
+        
+        
+        
+        
+        
         g.dispose();
 //            g.drawString(overlayText, 300, 300);
 //        g.dispose();
 
 // Save as new image
-        String combinedName = "combined" + imageFile.getName();
+        String temp = imageFile.getName();
+        int  plaatsPuntje = temp.lastIndexOf(".");
+        String imageFileExtensie=temp.substring(++plaatsPuntje);
+        String combinedName =  temp.substring(0, plaatsPuntje - 1) + "MetLiedText."+ imageFileExtensie;
+//        System.out.println(combinedName);
+//        System.out.println(imageFile.getParent());
+//        System.out.println(imageFileExtensie);
+        
         ImageIO.write(combined, "PNG", new File(imageFile.getParent(), combinedName));
-// TODO code application logic here
-//        } catch (IOException ex) {
-//            Logger.getLogger(GdTextDisplay.class.getName()).log(Level.SEVERE, null, ex);
+//        ImageIO.write(combined, "jpg", new File(imageFile.getParent(), combinedName));
+//        ImageIO.write(combined, imageFileExtensie, new File(imageFile.getParent(), combinedName));
     }
 }
