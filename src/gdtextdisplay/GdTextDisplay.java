@@ -85,9 +85,11 @@ public class GdTextDisplay {
 //        int fontsize = Integer.parseI fontGrootte);
         Font hetFont;
 //        hetFont = new Font("Courier", Font.PLAIN, fontGrootte);
-//        hetFont = new Font("Arial", Font.PLAIN, fontGrootte);
-        hetFont = new Font("TimesRoman", Font.PLAIN, fontGrootte);
-        
+        fontGrootte = w / fontGrootte;
+        hetFont = new Font("Arial", Font.PLAIN, fontGrootte);
+        hetFont = new Font("Arial", Font.BOLD, fontGrootte);
+//        hetFont = new Font("TimesRoman", Font.PLAIN, fontGrootte);
+
 //        g.setFont(new Font("Courier", Font.PLAIN, fontGrootte));
         g.setFont(hetFont);
 //            g.setFont(g.getFont().deriveFont(30f));
@@ -130,7 +132,7 @@ public class GdTextDisplay {
             g.drawString(line, xPos, yPos);
 
         }
-        
+
 //        // test font
 //      Font tr = new Font("TimesRoman", Font.PLAIN, fontGrootte);
 ////      Font trb = new Font("TimesRoman", Font.BOLD, 18);
@@ -158,24 +160,19 @@ public class GdTextDisplay {
 //      g.setFont(z);
 //      g.drawString("Hello World (zapf dingbats)",i,200);
         // **********
-        
-        
-        
-        
-        
         g.dispose();
 //            g.drawString(overlayText, 300, 300);
 //        g.dispose();
 
 // Save as new image
         String temp = imageFile.getName();
-        int  plaatsPuntje = temp.lastIndexOf(".");
-        String imageFileExtensie=temp.substring(++plaatsPuntje);
-        String combinedName =  temp.substring(0, plaatsPuntje - 1) + "MetLiedText."+ imageFileExtensie;
+        int plaatsPuntje = temp.lastIndexOf(".");
+        String imageFileExtensie = temp.substring(++plaatsPuntje);
+        String combinedName = temp.substring(0, plaatsPuntje - 1) + "MetLiedText." + imageFileExtensie;
 //        System.out.println(combinedName);
 //        System.out.println(imageFile.getParent());
 //        System.out.println(imageFileExtensie);
-        
+
         ImageIO.write(combined, "PNG", new File(imageFile.getParent(), combinedName));
 //        ImageIO.write(combined, "jpg", new File(imageFile.getParent(), combinedName));
 //        ImageIO.write(combined, imageFileExtensie, new File(imageFile.getParent(), combinedName));
